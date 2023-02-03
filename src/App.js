@@ -18,7 +18,6 @@ function App() {
     let tempArray = [...weatherArray];
     tempArray.pop();
     tempArray.pop();
-    // setIndex(0); No longer needed after adding this line to 'searchLocation' function. Keep here in case something breaks
     setWeatherArray(tempArray);
   };
 

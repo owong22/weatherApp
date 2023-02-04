@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import Loading from "./Loading.js";
-import Footer from "./Footer";
+import background from "./images/cloud-background-large.jpg";
+
 import "./App.css";
 function App() {
   const [data, setData] = useState({});
@@ -54,9 +55,14 @@ function App() {
   }
 
   return (
-    <div className="main">
+    <div
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+      }}
+    >
       <div>
-        <form className="form" onSubmit={searchLocation}>
+        <form onSubmit={searchLocation}>
           <div>
             <input
               value={location}
@@ -65,20 +71,16 @@ function App() {
               id="city"
               name="city"
               type="text"
-              className="form input"
+              className="bg-transparent"
             />
-            <button className="form button" type="submit">
-              Find City
-            </button>
+            <button type="submit">Find City</button>
           </div>
         </form>
       </div>
-
       <section className="section">
         <div className="section-center">
           {weatherArray.map((currentCity, cityIndex) => {
             let position = "nextSlide"; // Default, all classes will be nextSlide except for 2 that are lastSlide and activeSlide
-
             if (cityIndex == index) {
               // Display with slide that matches the current index
               position = "activeSlide";
@@ -100,21 +102,15 @@ function App() {
               popWeatherArray(); // Function that removes the last 2 cities in the array which are the duplicates
               setHasDuplicates(false); // Boolean created so the removal of the last two cities only occurs once after a third city is entered by a user. Does a more effiecnt solution exist?
             }
-
             return (
               <article key={currentCity.id + cityIndex} className={position}>
-                <h3 className="text">{currentCity.name}</h3>
-
+                <h3>{currentCity.name}</h3>
                 {currentCity.main ? (
-                  <h1 className="author">
-                    {currentCity.main.temp.toFixed()}°F
-                  </h1>
+                  <h1>{currentCity.main.temp.toFixed()}°F</h1>
                 ) : null}
-
                 {currentCity.weather ? (
                   <p>With {currentCity.weather[0].main}</p>
                 ) : null}
-
                 <div>
                   {currentCity.name !== undefined && (
                     <div>
@@ -134,9 +130,8 @@ function App() {
               </article>
             );
           })}
-
           {oscarsWA ? (
-            <h2 className="text">Oscar's Weather App</h2>
+            <h2>Oscar's Weather App</h2>
           ) : (
             <div>
               <button className="prev" onClick={decrementIndex}>
@@ -149,9 +144,6 @@ function App() {
           )}
         </div>
       </section>
-      <div>
-        <Footer></Footer>
-      </div>
     </div>
   );
 }

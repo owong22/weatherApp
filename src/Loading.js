@@ -1,10 +1,8 @@
-
-
 const Loading = () => {
   return (
-    <>
-      <h1>Loading</h1>
-    </>
+    <div>
+      <h1 className="flex justify-center text-8xl my-28">Loading...</h1>
+    </div>
   );
 };
 

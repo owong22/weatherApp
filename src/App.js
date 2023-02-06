@@ -61,9 +61,9 @@ function App() {
         backgroundSize: "cover",
       }}
     >
-      <div>
+      <div className="flex justify-center">
         <form onSubmit={searchLocation}>
-          <div>
+          <div className="my-10">
             <input
               value={location}
               onChange={(event) => setLocation(event.target.value)}
@@ -71,14 +71,19 @@ function App() {
               id="city"
               name="city"
               type="text"
-              className="bg-transparent"
+              className="mr-2 bg-transparent bg-white border-2 border-orange-600"
             />
-            <button type="submit">Find City</button>
+            <button
+              type="submit"
+              className="px-3 border-2 border-orange-600 rounded-full hover:bg-orange-600 hover:text-white"
+            >
+              Find City
+            </button>
           </div>
         </form>
       </div>
-      <section>
-        <div className="relative flex h-screen max-w-xl mx-auto my-0 text-center ">
+      <div>
+        <div className="relative flex h-screen max-w-xl pt-10 mx-auto my-0 font-bold text-center">
           {weatherArray.map((currentCity, cityIndex) => {
             let position = "nextSlide"; // Default, all classes will be nextSlide except for 2 that are lastSlide and activeSlide
             if (cityIndex == index) {
@@ -103,10 +108,12 @@ function App() {
               setHasDuplicates(false); // Boolean created so the removal of the last two cities only occurs once after a third city is entered by a user. Does a more effiecnt solution exist?
             }
             return (
-              <article key={currentCity.id + cityIndex} className={position}>
+              <section key={currentCity.id + cityIndex} className={position}>
                 <h3>{currentCity.name}</h3>
                 {currentCity.main ? (
-                  <h1>{currentCity.main.temp.toFixed()}°F</h1>
+                  <h1 className="text-4xl text-orange-600">
+                    {currentCity.main.temp.toFixed()}°F
+                  </h1>
                 ) : null}
                 {currentCity.weather ? (
                   <p>With {currentCity.weather[0].main}</p>
@@ -127,29 +134,31 @@ function App() {
                     </div>
                   )}
                 </div>
-              </article>
+              </section>
             );
           })}
           {oscarsWA ? (
-            <h2>Oscar's Weather App</h2>
+            <h2 className="mx-auto text-5xl font-bold text-orange-600 w-max my-36">
+              Oscar's Weather App
+            </h2>
           ) : (
             <div>
               <button
-                className="absolute left-0 bg-transparent border-2 border-black rounded-lg top-56"
+                className="absolute left-0 bg-transparent border-2 border-orange-600 rounded-lg top-56 hover:bg-orange-200"
                 onClick={decrementIndex}
               >
-                <FiChevronLeft className="w-10 h-10 "></FiChevronLeft>
+                <FiChevronLeft className="text-orange-600 h-9 w-9"></FiChevronLeft>
               </button>
               <button
-                className="absolute right-0 border-2 border-black rounded-lg top-56"
+                className="absolute right-0 border-2 border-orange-600 rounded-lg top-56 hover:bg-orange-200"
                 onClick={incrementIndex}
               >
-                <FiChevronRight className="w-10 h-10"></FiChevronRight>
+                <FiChevronRight className="text-orange-600 w-9 h-9"></FiChevronRight>
               </button>
             </div>
           )}
         </div>
-      </section>
+      </div>
     </div>
   );
 }

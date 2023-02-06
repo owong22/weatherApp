@@ -77,8 +77,8 @@ function App() {
           </div>
         </form>
       </div>
-      <section className="section">
-        <div className="section-center">
+      <section>
+        <div className="relative flex h-screen max-w-xl mx-auto my-0 text-center ">
           {weatherArray.map((currentCity, cityIndex) => {
             let position = "nextSlide"; // Default, all classes will be nextSlide except for 2 that are lastSlide and activeSlide
             if (cityIndex == index) {
@@ -134,11 +134,17 @@ function App() {
             <h2>Oscar's Weather App</h2>
           ) : (
             <div>
-              <button className="prev" onClick={decrementIndex}>
-                <FiChevronLeft></FiChevronLeft>
+              <button
+                className="absolute left-0 bg-transparent border-2 border-black rounded-lg top-56"
+                onClick={decrementIndex}
+              >
+                <FiChevronLeft className="w-10 h-10 "></FiChevronLeft>
               </button>
-              <button className="next" onClick={incrementIndex}>
-                <FiChevronRight></FiChevronRight>
+              <button
+                className="absolute right-0 border-2 border-black rounded-lg top-56"
+                onClick={incrementIndex}
+              >
+                <FiChevronRight className="w-10 h-10"></FiChevronRight>
               </button>
             </div>
           )}

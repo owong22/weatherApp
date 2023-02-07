@@ -42,7 +42,7 @@ function App() {
     setIsLoading(true);
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+
     if (data.name != undefined) {
       setData(data);
 
@@ -90,7 +90,7 @@ function App() {
         </form>
       </div>
       <div>
-        <div className="relative flex h-screen max-w-xl pt-10 mx-auto my-0 font-bold text-center">
+        <div className="relative flex h-screen max-w-xl mx-auto my-0 font-bold text-center">
           {weatherArray.map((currentCity, cityIndex) => {
             let position = "nextSlide"; // Default, all classes will be nextSlide except for 2 that are lastSlide and activeSlide
             if (cityIndex == index) {
@@ -116,7 +116,7 @@ function App() {
             }
             return (
               <section key={currentCity.id + cityIndex} className={position}>
-                <h3 className="mt-5 text-3xl">{currentCity.name}</h3>
+                <h3 className="mt-10 text-3xl">{currentCity.name}</h3>
                 <div className="flex justify-center my-8">
                   <div className="px-4 py-2 border-2 border-orange-600 rounded-md">
                     {currentCity.main ? (
@@ -135,24 +135,23 @@ function App() {
                 <div>
                   {currentCity.name !== undefined && (
                     <div>
-                      <div>
-                        <p className="text-xl">
-                          Humidity:
-                          {currentCity.main ? (
-                            <p className="inline mx-2">
-                              {currentCity.main.humidity}%
-                            </p>
-                          ) : null}
-                        </p>
+                      <div className="text-xl">
+                        Humidity:
+                        {currentCity.main ? (
+                          <p className="inline mx-2">
+                            {currentCity.main.humidity}%
+                          </p>
+                        ) : null}
                       </div>
-                      <p className="text-xl">
+
+                      <div className="text-xl">
                         Wind Speed:
                         {currentCity.wind ? (
                           <p className="inline mx-2 ">
                             {currentCity.wind.speed.toFixed()} MPH
                           </p>
                         ) : null}
-                      </p>
+                      </div>
                     </div>
                   )}
                 </div>

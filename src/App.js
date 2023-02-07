@@ -42,12 +42,19 @@ function App() {
     setIsLoading(true);
     const response = await fetch(url);
     const data = await response.json();
-    setData(data);
-    setIsLoading(false);
+    console.log(data);
+    if (data.name != undefined) {
+      setData(data);
+
+      setWeatherArray([data, ...weatherArray]);
+      setIndex(0);
+      setOscarsWA(false);
+    } else if (location == "") {
+    } else {
+      alert("Invalid city");
+    }
     setLocation("");
-    setWeatherArray([data, ...weatherArray]);
-    setIndex(0);
-    setOscarsWA(false);
+    setIsLoading(false);
   };
 
   if (isLoading) {
@@ -109,28 +116,43 @@ function App() {
             }
             return (
               <section key={currentCity.id + cityIndex} className={position}>
-                <h3>{currentCity.name}</h3>
-                {currentCity.main ? (
-                  <h1 className="text-4xl text-orange-600">
-                    {currentCity.main.temp.toFixed()}°F
-                  </h1>
-                ) : null}
-                {currentCity.weather ? (
-                  <p>With {currentCity.weather[0].main}</p>
-                ) : null}
+                <h3 className="mt-5 text-3xl">{currentCity.name}</h3>
+                <div className="flex justify-center my-8">
+                  <div className="px-4 py-2 border-2 border-orange-600 rounded-md">
+                    {currentCity.main ? (
+                      <h1 className="mb-3 text-6xl text-orange-600 ">
+                        {currentCity.main.temp.toFixed()}°F
+                      </h1>
+                    ) : null}
+
+                    {currentCity.weather ? (
+                      <p className="text-xl text-orange-600">
+                        {currentCity.weather[0].main}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
                 <div>
                   {currentCity.name !== undefined && (
                     <div>
                       <div>
-                        <p>Humidity: </p>
-                        {currentCity.main ? (
-                          <p>{currentCity.main.humidity}%</p>
-                        ) : null}
+                        <p className="text-xl">
+                          Humidity:
+                          {currentCity.main ? (
+                            <p className="inline mx-2">
+                              {currentCity.main.humidity}%
+                            </p>
+                          ) : null}
+                        </p>
                       </div>
-                      <p>Wind Speed: </p>
-                      {currentCity.wind ? (
-                        <p>{currentCity.wind.speed.toFixed()} MPH</p>
-                      ) : null}
+                      <p className="text-xl">
+                        Wind Speed:
+                        {currentCity.wind ? (
+                          <p className="inline mx-2 ">
+                            {currentCity.wind.speed.toFixed()} MPH
+                          </p>
+                        ) : null}
+                      </p>
                     </div>
                   )}
                 </div>
